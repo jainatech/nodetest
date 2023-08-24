@@ -1,6 +1,8 @@
 const Weather = require("../models/Weather");
 const axios = require("axios");
 
+//fetching 3rd party api and storing in mongodb
+
 const createWeatherthirdapi = async (req, res) => {
   try {
     const response = await axios.get(
@@ -14,28 +16,27 @@ const createWeatherthirdapi = async (req, res) => {
   
     const newsobj = new Weather(insertobj);
     await newsobj.save();
-    res.status(201).json(newsobj);
+    return res.status(201).json(newsobj);
   } catch (error) {
-    console.log(error,"erjeerkk")
-    res.status(500).json({ error: "Could not create weather data" });
+    return res.status(500).json({ error: "Could not create weather data" });
   }
 };
 const createWeather = async (req, res) => {
   try {
     const weatherData = req.body;
     const createdWeather = await Weather.create(weatherData);
-    res.status(201).json(createdWeather);
+    return res.status(201).json(createdWeather);
   } catch (error) {
-    res.status(500).json({ error: "Could not create weather data" });
+    return res.status(500).json({ error: "Could not create weather data" });
   }
 };
 
 const fetchWeather = async (req, res) => {
   try {
     const weatherRecords = await Weather.find();
-    res.json(weatherRecords);
+    return res.json(weatherRecords);
   } catch (error) {
-    res.status(500).json({ error: "Could not retrieve weather data" });
+    return res.status(500).json({ error: "Could not retrieve weather data" });
   }
 };
 
@@ -46,18 +47,18 @@ const updateWeather = async (req, res) => {
       req.body,
       { new: true }
     );
-    res.json(updatedWeather);
+    return res.json(updatedWeather);
   } catch (error) {
-    res.status(500).json({ error: "Could not update weather data" });
+    return res.status(500).json({ error: "Could not update weather data" });
   }
 };
 
 const deleteWeather = async (req, res) => {
   try {
     await Weather.findByIdAndDelete(req.params.id);
-    res.json({ message: "Weather data deleted successfully" });
+    return res.json({ message: "Weather data deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Could not delete weather data" });
+    return res.status(500).json({ error: "Could not delete weather data" });
   }
 };
 
@@ -67,14 +68,14 @@ const searchWeather = async (req, res) => {
     const weatherData = await Weather.findOne({ city });
 
     if (weatherData) {
-      res.json(weatherData);
+      return res.json(weatherData);
     } else {
-      res
+      return res
         .status(404)
         .json({ message: "Weather data not found for the specified city" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Could not retrieve weather data" });
+    return res.status(500).json({ error: "Could not retrieve weather data" });
   }
 };
 

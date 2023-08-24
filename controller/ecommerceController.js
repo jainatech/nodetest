@@ -10,29 +10,27 @@ const createProduct = async (req, res) => {
         name, price, description 
     });
     await newProduct.save();
-    res.status(201).json(newProduct);
+    return res.status(201).json(newProduct);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create Product" });
+    return res.status(500).json({ error: "Failed to create Product" });
   }
 };
 
 const fetchProduct = async (req, res) => {
   try {
-    console.log("eee",ecommerce)
-
+    
     const product = await Product.find().populate("name", "price", "description" );
-    res.status(200).json(product);
+    return res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch product" });
+    return res.status(500).json({ error: "Failed to fetch product" });
   }
 };
 const fetchndCreateProduct = async (req, res) => {
   try {
     const product = await Product.insertMany(ecommerce)
-    res.status(200).json(product);
+    return res.status(200).json(product);
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "Failed to fetch product" });
+    return res.status(500).json({ error: "Failed to fetch product" });
   }
 };
 const fetchProductById = async (req, res) => {
@@ -43,9 +41,9 @@ const fetchProductById = async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: "product not found" });
     }
-    res.status(200).json(product);
+    return res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch product" });
+    return res.status(500).json({ error: "Failed to fetch product" });
   }
 };
 
@@ -60,9 +58,9 @@ const updateProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: "product not found" });
     }
-    res.status(200).json(product);
+    return  res.status(200).json(product);
   } catch (error) {
-    res.status(500).json({ error: "Failed to update product" });
+    return res.status(500).json({ error: "Failed to update product" });
   }
 };
 
@@ -72,9 +70,9 @@ const deleteProduct = async (req, res) => {
     if (!product) {
       return res.status(404).json({ error: "product not found" });
     }
-    res.status(200).json({ message: "product deleted successfully" });
+   return res.status(200).json({ message: "product deleted successfully" });
   } catch (error) {
-    res.status(500).json({ error: "Failed to delete product" });
+    return res.status(500).json({ error: "Failed to delete product" });
   }
 };
 
@@ -84,9 +82,9 @@ const serachProduct = async (req, res) => {
         const products = await Product.find({
           name: { $regex: searchQuery, $options: 'i' }, 
         });
-        res.json(products);
+        return  res.json(products);
       } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
 };
 
@@ -112,9 +110,9 @@ const filterProduct = async (req, res) => {
         }
     
         const products = await Product.find(filter);
-        res.json(products);
+        return res.json(products);
       } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
 };
 module.exports = {

@@ -20,11 +20,11 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
-// AWS.config.update({
-//     accessKeyId: 'AKIASMLC3LIMHQDQWNXY',
-//     secretAccessKey: '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',
-//     region: 'us-east-1', 
-//   });
+AWS.config.update({
+    accessKeyId: 'AKIASMLC3LIMHQDQWNXY',
+    secretAccessKey: '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',
+    region: 'us-east-1', 
+  });
 
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);

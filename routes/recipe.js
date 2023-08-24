@@ -8,13 +8,14 @@ router.post('/fetch-create',authMiddleware,fetchndCreateRecipe);
 
 router.get('/', authMiddleware,fetchRecipe);
 
+router.get('/search', authMiddleware, searchRecipe);
+
+router.get('/filter', authMiddleware, filterRecipe);
+
 router.put('/:id', authMiddleware, updateRecipe);
 
 router.delete('/:id', authMiddleware, deleteRecipe);
 
-router.get('/search', authMiddleware, searchRecipe);
-
-router.get('/filter', authMiddleware, filterRecipe);
 
 
 module.exports = router;

@@ -11,9 +11,9 @@ const registerUser = async(req, res)=>{
         const user = new User({ email, password: hashedPassword });
         await user.save();
     
-        res.status(201).json({ message: 'User registered successfully' });
+        return res.status(201).json({ message: 'User registered successfully' });
       } catch (error) {
-        res.status(500).json({ error: 'Registration failed' });
+        return res.status(500).json({ error: 'Registration failed' });
       }
 }
 
@@ -34,9 +34,9 @@ const loginUser = async(req, res)=>{
     
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     
-        res.status(200).json({ token });
+        return  res.status(200).json({ token });
       } catch (error) {
-        res.status(500).json({ error: 'Authentication failed' });
+        return  res.status(500).json({ error: 'Authentication failed' });
       }
 }
 

@@ -11,9 +11,9 @@ router.put('/:id', authMiddleware, updateSocialMediaPost);
 
 router.delete('/:id', authMiddleware, deleteSocialMediaPost);
 
-router.post('/follow', followuser);
+router.post('/follow',authMiddleware, followuser);
 
-router.post('/unfollow', unfollowuser);
+router.post('/unfollow',authMiddleware, unfollowuser);
 
 
 

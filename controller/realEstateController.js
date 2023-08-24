@@ -4,19 +4,18 @@ const {real_estate}=require('../thirdpartyjson')
 const createProperty = async (req, res) => {
     try {
         const property = await Property.create(req.body);
-        res.status(201).json(property);
+        return res.status(201).json(property);
       } catch (error) {
-        res.status(500).json({ error: 'Error creating property' });
+        return res.status(500).json({ error: 'Error creating property' });
       }
 };
 
 const fetchndCreateProperty = async (req, res) => {
   try {
     let datain=await Property.insertMany(real_estate)
-    res.status(200).json(datain);
+    return res.status(200).json(datain);
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "Failed to fetch product" });
+    return res.status(500).json({ error: "Failed to create property" });
   }
 };
 
@@ -24,9 +23,9 @@ const fetchndCreateProperty = async (req, res) => {
 const fetchProperty = async (req, res) => {
     try {
         const properties = await Property.find();
-        res.json(properties);
+        return res.json(properties);
       } catch (error) {
-        res.status(500).json({ error: 'Error retrieving properties' });
+        return res.status(500).json({ error: 'Error retrieving properties' });
       }
 };
 
@@ -34,9 +33,9 @@ const updateProperty = async (req, res) => {
     const propertyId = req.params.id;
     try {
       await Property.findByIdAndUpdate(propertyId, req.body);
-      res.json({ message: 'Property updated successfully' });
+      return res.json({ message: 'Property updated successfully' });
     } catch (error) {
-      res.status(500).json({ error: 'Error updating property' });
+      return res.status(500).json({ error: 'Error updating property' });
     }
 };
 
@@ -44,9 +43,9 @@ const deleteProperty = async (req, res) => {
     const propertyId = req.params.id;
     try {
       await Property.findByIdAndDelete(propertyId);
-      res.json({ message: 'Property deleted successfully' });
+      return res.json({ message: 'Property deleted successfully' });
     } catch (error) {
-      res.status(500).json({ error: 'Error deleting property' });
+      return res.status(500).json({ error: 'Error deleting property' });
     }
 };
 
@@ -54,9 +53,9 @@ const searchProperty = async (req, res) => {
     const location = req.query.location;
     try {
       const properties = await Property.find({ location });
-      res.json(properties);
+      return res.json(properties);
     } catch (error) {
-      res.status(500).json({ error: 'Error searching properties' });
+      return res.status(500).json({ error: 'Error searching properties' });
     }
 };
 
@@ -82,9 +81,9 @@ const filterProperty = async (req, res) => {
   
     try {
       const properties = await Property.find(filterOptions);
-      res.json(properties);
+      return res.json(properties);
     } catch (error) {
-      res.status(500).json({ error: 'Error filtering properties' });
+      return res.status(500).json({ error: 'Error filtering properties' });
     }
 };
 

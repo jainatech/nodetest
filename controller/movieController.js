@@ -6,28 +6,27 @@ const createMovie = async (req, res) => {
         const { title, director, genre, year } = req.body;
         const movie = new Movie({ title, director, genre, year });
         const savedMovie = await movie.save();
-        res.status(201).json(savedMovie);
+        return res.status(201).json(savedMovie);
       } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
       }
 };
 
 const fetchndCreateMovie = async (req, res) => {
   try {
     let datain=await Movie.insertMany(movies)
-    res.status(200).json(datain);
+    return res.status(200).json(datain);
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "Failed to fetch product" });
+    return res.status(500).json({ error: "Failed to create movie" });
   }
 };
 
 const fetchMovie = async (req, res) => {
     try {
         const movies = await Movie.find();
-        res.json(movies);
+        return res.json(movies);
       } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
   };
 
@@ -46,9 +45,9 @@ const fetchMovie = async (req, res) => {
           return res.status(404).json({ message: 'Movie not found' });
         }
     
-        res.json(updatedMovie);
+        return res.json(updatedMovie);
       } catch (error) {
-        res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.message });
       }
   };
 
@@ -61,9 +60,9 @@ const fetchMovie = async (req, res) => {
           return res.status(404).json({ message: 'Movie not found' });
         }
     
-        res.json({ message: 'Movie deleted' });
+        return res.json({ message: 'Movie deleted' });
       } catch (error) {
-        res.status(500).json({ error: error.message });
+        return res.status(500).json({ error: error.message });
       }
   };
 
@@ -85,9 +84,9 @@ const fetchMovie = async (req, res) => {
             }
         
             const searchResults = await Movie.find(searchQuery);
-            res.json(searchResults);
+            return res.json(searchResults);
           } catch (error) {
-            res.status(500).json({ error: error.message });
+            return res.status(500).json({ error: error.message });
           }
   };
 

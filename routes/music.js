@@ -5,7 +5,9 @@ const router = express.Router();
 
 router.post('/',authMiddleware, createMusic);
 
-router.post('/fetch-create', fetchndCreateMusic);
+router.post('/fetch-create',authMiddleware, fetchndCreateMusic);
+
+router.get('/search',authMiddleware, serachMusic);
 
 router.get('/:postId', authMiddleware, fetchMusicById);
 
@@ -13,7 +15,6 @@ router.put('/:postId', authMiddleware, updateMusic);
 
 router.delete('/:postId', authMiddleware, deleteMusic);
 
-router.delete('/search',authMiddleware, serachMusic);
 
 
 module.exports = router;

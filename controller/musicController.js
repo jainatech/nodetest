@@ -9,30 +9,28 @@ const createMusic = async (req, res) => {
         trackName, artist, album 
     });
     await newMusic.save();
-    res.status(201).json(newMusic);
+    return res.status(201).json(newMusic);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create Music" });
+    return res.status(500).json({ error: "Failed to create Music" });
   }
 };
 
 
 const fetchndCreateMusic = async (req, res) => {
-  console.log("movie",music);
   try {
     let datain=await Music.insertMany(music)
-    res.status(200).json(music);
+    return res.status(200).json(music);
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "Failed to fetch Music" });
+    return res.status(500).json({ error: "Failed to fetch Music" });
   }
 };
 
 const fetchMusic = async(req, res)=>{
     try {
         const music = await Music.find().populate('trackName', 'artist','album');
-        res.status(200).json(music);
+        return  res.status(200).json(music);
       } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch music' });
+        return res.status(500).json({ error: 'Failed to fetch music' });
       }
 }
 
@@ -42,7 +40,7 @@ const fetchMusicById = async(req, res)=>{
         if (!music) {
           return res.status(404).json({ error: 'Music not found' });
         }
-        res.status(200).json(music);
+        return  res.status(200).json(music);
       } catch (error) {
         res.status(500).json({ error: 'Failed to fetch Music' });
       }
@@ -60,9 +58,9 @@ const updateMusic = async(req, res)=>{
         if (!music) {
           return res.status(404).json({ error: 'music not found' });
         }
-        res.status(200).json(music);
+        return res.status(200).json(music);
       } catch (error) {
-        res.status(500).json({ error: 'Failed to update music' });
+        return res.status(500).json({ error: 'Failed to update music' });
       }
 }
 
@@ -74,7 +72,7 @@ const deleteMusic = async(req, res)=>{
         }
         res.status(200).json({ message: 'Music deleted successfully' });
       } catch (error) {
-        res.status(500).json({ error: 'Failed to delete Music' });
+        return  res.status(500).json({ error: 'Failed to delete Music' });
       }
 }
 
@@ -96,9 +94,9 @@ const serachMusic = async(req, res)=>{
         }
     
         const musicList = await Music.find(query);
-        res.send(musicList);
+        return res.send(musicList);
       } catch (error) {
-        res.status(500).send(error);
+        return res.status(500).send(error);
       }
 }
 

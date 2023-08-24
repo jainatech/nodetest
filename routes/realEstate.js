@@ -10,13 +10,15 @@ router.post('/fetch-create',authMiddleware,fetchndCreateProduct);
 
 router.get('/', authMiddleware,fetchProperty);
 
+router.get('/search', authMiddleware, searchProperty);
+
+router.get('/filter', authMiddleware, filterProperty);
+
 router.put('/:id', authMiddleware, updateProperty);
 
 router.delete('/:id', authMiddleware, deleteProperty);
 
-router.get('/search', authMiddleware, searchProperty);
 
-router.get('/filter', authMiddleware, filterProperty);
 
 
 module.exports = router;

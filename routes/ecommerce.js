@@ -6,9 +6,13 @@ const router = express.Router();
 
 router.post('/',authMiddleware, createProduct);
 
-router.post('/create', fetchndCreateProduct);
+router.post('/create',authMiddleware ,fetchndCreateProduct);
 
-router.get('/',fetchProduct);
+router.get('/',authMiddleware,fetchProduct);
+
+router.get('/search',authMiddleware, serachProduct);
+
+router.get('/filter',authMiddleware, filterProduct);
 
 router.get('/:productId', authMiddleware, fetchPostById);
 
@@ -16,9 +20,7 @@ router.put('/:productId', authMiddleware, updateProduct);
 
 router.delete('/:productId', authMiddleware, deleteProduct);
 
-router.delete('/search',authMiddleware, serachProduct);
 
-router.get('/filter',authMiddleware, filterProduct);
 
 
 module.exports = router;
