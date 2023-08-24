@@ -1,4 +1,5 @@
 const Music = require("../models/Music");
+const {music}=require('../thirdpartyjson')
 
 const createMusic = async (req, res) => {
   try {
@@ -14,6 +15,17 @@ const createMusic = async (req, res) => {
   }
 };
 
+
+const fetchndCreateMusic = async (req, res) => {
+  console.log("movie",music);
+  try {
+    let datain=await Music.insertMany(music)
+    res.status(200).json(music);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Failed to fetch Music" });
+  }
+};
 
 const fetchMusic = async(req, res)=>{
     try {
@@ -93,4 +105,4 @@ const serachMusic = async(req, res)=>{
   
 
 
-module.exports = { createMusic, fetchMusic, fetchMusicById,updateMusic,deleteMusic,serachMusic };
+module.exports = { createMusic, fetchMusic, fetchMusicById,updateMusic,deleteMusic,serachMusic, fetchndCreateMusic };

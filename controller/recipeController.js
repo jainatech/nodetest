@@ -1,4 +1,5 @@
 const Recipe = require("../models/Recipe");
+const {recipes}=require('../thirdpartyjson')
 
 const createRecipe = async (req, res) => {
   try {
@@ -6,6 +7,17 @@ const createRecipe = async (req, res) => {
     res.status(201).json(recipe);
   } catch (error) {
     res.status(500).json({ error: "Could not create recipe" });
+  }
+};
+
+const fetchndCreateRecipe = async (req, res) => {
+  console.log("recipes",recipes);
+  try {
+    let datain=await Recipe.insertMany(recipes)
+    res.status(200).json(recipes);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Failed to fetch Music" });
   }
 };
 
@@ -76,4 +88,5 @@ module.exports = {
   deleteRecipe,
   searchRecipe,
   filterRecipe,
+  fetchndCreateRecipe
 };

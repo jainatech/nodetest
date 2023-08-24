@@ -1,5 +1,5 @@
 const Movie = require("../models/Movie");
-const movies=require('../thirdpartyjson')
+const {movies}=require('../thirdpartyjson')
 
 const createMovie = async (req, res) => {
     try {
@@ -13,10 +13,9 @@ const createMovie = async (req, res) => {
 };
 
 const fetchndCreateMovie = async (req, res) => {
-  console.log("movie",movies);
   try {
-    let datain=await Movie.insertMany(movie)
-    res.status(200).json(movie);
+    let datain=await Movie.insertMany(movies)
+    res.status(200).json(datain);
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: "Failed to fetch product" });

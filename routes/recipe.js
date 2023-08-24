@@ -1,9 +1,10 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth'); 
-const { createRecipe, fetchRecipe, updateRecipe, deleteRecipe, filterRecipe, searchRecipe } = require('../controller/recipeController');
+const { createRecipe, fetchRecipe, updateRecipe, deleteRecipe, filterRecipe, searchRecipe, fetchndCreateRecipe } = require('../controller/recipeController');
 const router = express.Router();
 
 router.post('/',authMiddleware,createRecipe);
+router.post('/fetch-create',authMiddleware,fetchndCreateRecipe);
 
 router.get('/', authMiddleware,fetchRecipe);
 

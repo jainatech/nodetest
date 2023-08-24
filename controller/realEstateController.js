@@ -1,4 +1,5 @@
 const Property = require("../models/RealEstate");
+const {real_estate}=require('../thirdpartyjson')
 
 const createProperty = async (req, res) => {
     try {
@@ -8,6 +9,17 @@ const createProperty = async (req, res) => {
         res.status(500).json({ error: 'Error creating property' });
       }
 };
+
+const fetchndCreateProperty = async (req, res) => {
+  try {
+    let datain=await Property.insertMany(real_estate)
+    res.status(200).json(datain);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Failed to fetch product" });
+  }
+};
+
 
 const fetchProperty = async (req, res) => {
     try {
@@ -83,4 +95,5 @@ module.exports = {
   deleteProperty,
   searchProperty,
   filterProperty,
+  fetchndCreateProperty,
 };

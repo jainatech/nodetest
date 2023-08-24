@@ -6,4 +6,7 @@ const propertySchema = new mongoose.Schema({
     price: Number,
   });
 
-module.exports = mongoose.model('Property', propertySchema);
+  const Property = mongoose.model('Property', propertySchema);
+
+  module.exports = Property;
+

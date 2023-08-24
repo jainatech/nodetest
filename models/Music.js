@@ -6,4 +6,6 @@ const musicSchema = new mongoose.Schema({
     album: { type: String, },
   });
 
-module.exports = mongoose.model('Music', musicSchema);
+  const Music = mongoose.model('Music', musicSchema);
+
+  module.exports = Music;

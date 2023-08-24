@@ -1,8 +1,10 @@
 const Post = require('../models/Post');
+const {blog_post}=require('../thirdpartyjson')
 
 const createPost = async(req, res)=>{
     try {
         const { title, content } = req.body;
+        console.log("rrr",req.file,req.body);
         const imageUrl = req.file.location; 
     
         const newPost = new Post({
@@ -14,9 +16,22 @@ const createPost = async(req, res)=>{
         await newPost.save();
         res.status(201).json(newPost);
       } catch (error) {
+        console.log("eee",error);
         res.status(500).json({ error: 'Failed to create post' });
       }
 }
+
+
+const fetchndCreatePost = async (req, res) => {
+  console.log("blog_post",blog_post);
+  try {
+    let datain=await Post.insertMany(blog_post)
+    res.status(200).json(blog_post);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Failed to fetch Music" });
+  }
+};
 
 
 const fetchPost = async(req, res)=>{
@@ -85,5 +100,5 @@ const searchPost =  async (req, res) => {
   };
 
 
-module.exports = {createPost,fetchPost,fetchPostById,updatePost,deletePost,searchPost}
+module.exports = {createPost,fetchPost,fetchPostById,updatePost,deletePost,searchPost,fetchndCreatePost}
 

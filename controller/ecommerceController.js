@@ -1,5 +1,5 @@
 const Product = require("../models/ECommerce");
-const ecommerce=require('../thirdpartyjson')
+const {ecommerce}=require('../thirdpartyjson')
 
 
 const createProduct = async (req, res) => {
@@ -28,8 +28,6 @@ const fetchProduct = async (req, res) => {
 };
 const fetchndCreateProduct = async (req, res) => {
   try {
-    console.log("ee",ecommerce);
-  
     const product = await Product.insertMany(ecommerce)
     res.status(200).json(product);
   } catch (error) {

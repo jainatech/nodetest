@@ -1,11 +1,11 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth'); 
-const{ createMusic, fetchMusic, fetchMusicById,updateMusic,deleteMusic, serachMusic } = require('../controller/musicController');
+const{ createMusic, fetchMusic, fetchMusicById,updateMusic,deleteMusic, serachMusic, fetchndCreateMusic } = require('../controller/musicController');
 const router = express.Router();
 
 router.post('/',authMiddleware, createMusic);
 
-router.get('/', authMiddleware,fetchMusic);
+router.post('/fetch-create', fetchndCreateMusic);
 
 router.get('/:postId', authMiddleware, fetchMusicById);
 
